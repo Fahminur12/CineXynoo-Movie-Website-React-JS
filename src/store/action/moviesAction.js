@@ -32,7 +32,7 @@ export const fetchRecommendedMovies = async (movieId) => {
   const response = await axios.get(
    `${BASE_URL}/movie/${movieId}/recommendations?api_key=${API_KEY}`
   );
-  console.log("Recommended Movies Response:", response.data); // Log response
+  console.log("Recommended Movies Response:", response.data); 
   return response.data.results;
 };
 
@@ -46,16 +46,16 @@ export const fetchSimilarMovies = async (movieId) => {
 
 
 export const fetchSearchMovies = async (query) => {
-  console.log("Searching for:", query); // Log query
+  console.log("Searching for:", query); 
   try {
     const response = await axios.get(
       `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
     );
-    console.log("Search Results:", response.data.results); // Log hasil
+    console.log("Search Results:", response.data.results); 
     return response.data.results;
   } catch (error) {
     console.error("Error fetching search results:", error);
-    throw error; // Re-throw the error to handle it later
+    throw error; 
   }
 };
 
@@ -64,7 +64,7 @@ export const fetchAllMovies = async () => {
   const response = await axios.get(
     `${BASE_URL}/discover/movie?api_key=${API_KEY}`
   );
-  console.log("All Movies Response:", response); // Log full response for debugging
+  console.log("All Movies Response:", response); 
   return response.data.results;
 };
 

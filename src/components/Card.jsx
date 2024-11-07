@@ -12,15 +12,15 @@ const Card = ({ movie, onClick }) => {
     >
       <img src={poster_path} alt={movie.title} />
       <div className="absolute bottom-0 h-16 backdrop-blur-3xl w-full bg-black/50 rounded-se-xl rounded-ss-xl p-2">
-        <h2 className="text-ellipsis line-clamp-1 text-lg font-semibold">
+        <h2 className="text-ellipsis line-clamp-1 text-lg text-white poppins-medium">
           {movie.title}
         </h2>
-        <div className="text-sm text-neutral-400 flex justify-between items-center">
+        <div className="text-sm text-neutral-400 flex justify-between items-center poppins-thin">
           <p>{movie.release_date}</p>
           <p className="px-1 rounded-full text-xs text-white flex gap-1">
             <Icon
               icon="material-symbols:star"
-              className="text-yellow-300 text-xs mt-0.5"
+              className="text-yellow-300 text-xs mt-0.5 poppins-thin  "
             />
             Rating: {movie.vote_average}
           </p>

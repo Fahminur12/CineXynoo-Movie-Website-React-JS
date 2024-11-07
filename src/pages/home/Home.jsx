@@ -42,16 +42,16 @@ const Home = () => {
     const API_KEY = "f1701f8950348d98566289dc47fb1c6f";
     const BASE_URL = "https://api.themoviedb.org/3";
 
-    try {
+    try { 
       const response = await axios.get(
         `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
       );
-      const trailers = response.data.results.filter(
+      const populars = response.data.results.filter(
         (video) => video.type === "Trailer" && video.site === "YouTube"
       );
       setVideoUrl(
-        trailers.length > 0
-          ? `https://www.youtube.com/embed/${trailers[0].key}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0`
+        populars.length > 0
+          ? `https://www.youtube.com/embed/${populars[0].key}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0`
           : null
       );
     } catch (error) {
@@ -78,22 +78,22 @@ const Home = () => {
 
   const scroll = (ref, direction) => {
     if (ref.current) {
-      console.log(ref.current); // Check if the ref is valid
+      console.log(ref.current); 
       ref.current.scrollBy({
         left: direction === "left" ? -300 : 300,
         behavior: "smooth",
       });
     } else {
-      console.error("Ref is null"); // Error message if ref is null
+      console.error("Ref is null"); 
     }
   };
 
   if (status === "loading") {
-    return <div>Loading...</div>; // Consider using a spinner here
+    return <div>Loading...</div>; 
   }
 
   if (status === "failed") {
-    return <div>Error: {error}. Please try again later.</div>; // Improved error message
+    return <div>Error: {error}. Please try again later.</div>; 
   }
 
   return (
@@ -105,8 +105,8 @@ const Home = () => {
         genres={genres}
         videoUrl={videoUrl}
         selectedMovie={selectedMovie}
-        scrollLeft={(ref) => scroll(ref, "left")} // Updated to pass the correct ref
-        scrollRight={(ref) => scroll(ref, "right")} // Updated to pass the correct ref
+        scrollLeft={(ref) => scroll(ref, "left")} 
+        scrollRight={(ref) => scroll(ref, "right")} 
         handleCardClick={handleCardClick}
         trendingRef={trendingRef}
         popularRef={popularRef}

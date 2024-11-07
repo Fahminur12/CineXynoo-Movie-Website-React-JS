@@ -18,26 +18,26 @@ function App() {
   const theme = useState("light");
 
   return (
-    <div className="bg-white dark:bg-darkBlue">
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <ThemeContext.Provider value={theme}>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movie/:id" element={<MovieDetail />} />
-              <Route path="/explore" element={<Explore />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/favorites" element={<Favorite />} />
-              <Route path="/ratings" element={<RatedMovies />} />
-              <Route path="/search/:query" element={<Search />} />
-            </Routes>
-            <Footer />
-          </ThemeContext.Provider>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <div className="bg-white dark:bg-[#1A1A1A]">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <ThemeContext.Provider value={theme}>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/movie/:id" element={<MovieDetail />} />
+                <Route path="/explore" element={<Explore />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/favorites" element={<Favorite />} />
+                <Route path="/ratings" element={<RatedMovies />} />
+                <Route path="/search/:query" element={<Search />} />
+              </Routes>
+              <Footer />
+            </ThemeContext.Provider>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </div>
   );
 }

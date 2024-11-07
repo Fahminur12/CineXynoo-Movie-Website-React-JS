@@ -8,7 +8,7 @@ import ThemeContext from "./context/ThemeContext";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const [getTheme, setTheme] = useContext(ThemeContext);
   const root = window.document.documentElement;
 
@@ -35,45 +35,56 @@ const Navbar = () => {
   };
 
   return (
-    <header className="absolute top-0 w-full h-16 bg-gradient-to-b from-white dark:from-black to-transparent text-white z-50">
+    <header className="absolute top-0 w-full h-16 bg-transparent text-white z-50">
       <nav className="flex items-center justify-between h-full px-10">
         <div className=" flex items-center">
-          <span className="navbar-start text-2xl font-medium text-violetPurple">
+          <span className="navbar-start text-2xl text-violetPurple bebas-neue-regular">
             CINE
           </span>
-          <span className="navbar-start text-2xl font-medium ml-1 text-black dark:text-white">Xynoo</span>
-          <div className="flex space-x-6 ml-5 poppins-medium ">
-            <a href="/" className="text-black dark:text-white text-sm hover:text-violetPurple">
+          <span className="navbar-start text-2xl bebas-neue-regular ml-1 text-black dark:text-white">
+            Xynoo
+          </span>
+          <div className="flex space-x-6 ml-5 poppins-semibold">
+            <Link
+              to="/"
+              className="text-black dark:text-white text-sm hover:text-violetPurple"
+            >
               Home
-            </a>
-            <a href="/ratings" className="text-black dark:text-white text-sm hover:text-violetPurple">
-              Rated
-            </a>
-            <a
-              href="/explore"
+            </Link>
+            <Link
+              to="/explore"
               className="text-black dark:text-white text-sm hover:text-violetPurple"
             >
               Explore
-            </a>
-            <a
-              href="/favorites"
-              className="text-black dark:text-white text-sm hover:text-violetPurple"
-            >
-              Favorites
-            </a>
+            </Link>
           </div>
         </div>
-        <div className=" flex items-center mr-5 ">
+        <div className=" flex items-center ">
           <div className="flex items-center mr-5 focus-within:text-violetPurple">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search Movie. . ."
               onKeyDown={handleSearch}
-              className="input-search mr-6 p-1 pl-10 rounded-3xl bg-transparent w-60 border-black dark:border-white focus:outline-none focus:border-violetPurple border-2 relative hover:border-violetPurple"
+              className="input-search mr-5 p-2 pl-10 bg-black/50 backdrop-blur-sm rounded-[20px] w-60 focus:outline-none relative border-none placeholder-white text-sm poppins-regular"
             />
-            <Icon icon="mingcute:search-line" className="ml-3 absolute text-black dark:text-white" />
+            <Icon
+              icon="mingcute:search-line"
+              className="ml-3 absolute text-black dark:text-white"
+            />
           </div>
-          <label className="swap swap-rotate mr-3 text-black dark:text-white">
+          <Link
+            to="/favorites"
+            className="text-black dark:text-white text-sm hover:text-violetPurple mr-5"
+          >
+            <Icon icon="stash:save-ribbon-duotone" className="text-2xl" />
+          </Link>
+          <Link
+            to="/ratings"
+            className="text-black dark:text-white text-sm mr-5 hover:text-violetPurple"
+          >
+            <Icon icon="uil:favorite" className="text-2xl" />
+          </Link>
+          <label className="swap swap-rotate mr-5 text-black dark:text-white">
             {/* this hidden checkbox controls the state */}
             <input
               type="checkbox"

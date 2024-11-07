@@ -98,7 +98,7 @@ const moviesSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getAllMovies.fulfilled, (state, action) => {
-        state.allMovies = action.payload; // Save all movies in the state
+        state.allMovies = action.payload;
         state.status = "succeeded";
       })
       .addCase(getAllMovies.rejected, (state, action) => {
@@ -121,7 +121,7 @@ const moviesSlice = createSlice({
       });
 
     builder.addCase(getGenres.fulfilled, (state, action) => {
-      state.genres = action.payload; // Simpan genres di state
+      state.genres = action.payload; 
     });
 
     // Trending Movies
