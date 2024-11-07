@@ -24,7 +24,7 @@ const MovieDetailView = ({
   onRemoveRating,
 }) => {
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="w-full h-[580px] relative">
         <div className="w-full h-full">
           <img

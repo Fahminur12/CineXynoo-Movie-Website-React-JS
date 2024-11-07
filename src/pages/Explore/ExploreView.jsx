@@ -1,4 +1,3 @@
-
 import React from "react";
 import Card from "../../components/Card";
 
@@ -10,7 +9,7 @@ const ExploreView = ({
   onCardClick,
 }) => {
   return (
-    <div className="pt-20 px-10">
+    <div className="pt-20 px-10 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">Explore Movies</h1>
       <div className="genre-filter pb-8">
         <label htmlFor="genre" className="text-white">
@@ -32,7 +31,13 @@ const ExploreView = ({
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {movies && movies.length > 0 ? (
-          movies.map((movie) => <Card onClick={() => onCardClick(movie.id)} key={movie.id} movie={movie}  />)
+          movies.map((movie) => (
+            <Card
+              onClick={() => onCardClick(movie.id)}
+              key={movie.id}
+              movie={movie}
+            />
+          ))
         ) : (
           <p>Tidak ada film ditemukan.</p>
         )}

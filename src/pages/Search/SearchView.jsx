@@ -8,7 +8,7 @@ const SearchView = ({ query, searchResults, loading, error, onCardClick }) => {
   }
 
   return (
-    <div className="pt-20 px-10 ml-5">
+    <div className="pt-20 px-10 ml-5 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">Search Results: "{query}"</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {searchResults && searchResults.length > 0 ? (

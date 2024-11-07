@@ -3,7 +3,7 @@ import Card from "../../components/Card";
 
 const RatedMoviesView = ({ movieIds, ratedMovies, ratings, handleCardClick }) => {
   return (
-    <div className="ml-5 pt-20">
+    <div className="ml-5 pt-20 min-h-screen">
       <h1 className="text-2xl font-bold mb-5">Rated Movies</h1>
       {movieIds.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">

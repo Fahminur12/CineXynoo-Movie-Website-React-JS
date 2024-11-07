@@ -15,7 +15,7 @@ const HomeView = ({
   nowPlayingRef,
 }) => {
   return (
-    <div className="">
+    <div className="min-h-screen">
       <section className="relative overflow-hidden">
         <div className="relative w-full h-[900px] bg-center bg-no-repeat">
           {videoUrl ? (
