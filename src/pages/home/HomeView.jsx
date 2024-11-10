@@ -28,7 +28,7 @@ const HomeView = ({
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                className="w-full h-full scale-[1.95] origin-center"
+                className="w-full h-full scale-[4.95] md:scale-[1.95] origin-center"
               ></iframe>
             </div>
           ) : (

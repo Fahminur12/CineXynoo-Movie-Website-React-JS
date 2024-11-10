@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchMovies } from "../store/reducer/moviesReducer";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ThemeContext from "./context/ThemeContext";
 
 const Navbar = () => {
@@ -11,6 +11,19 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [getTheme, setTheme] = useContext(ThemeContext);
   const root = window.document.documentElement;
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScoll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScoll);
+    return () => {
+      window.removeEventListener("scroll", handleScoll);
+    };
+  });
 
   const theme = useSelector((state) => state);
   console.log(theme);
@@ -35,7 +48,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="absolute top-0 w-full h-16 bg-transparent text-white z-50">
+    <header className={`fixed top-0 w-full h-16 z-50 transition-colors duration-300 ${isScrolled ? 'bg-black/90' : 'bg-transparent'}`}>
       <nav className="flex items-center justify-between h-full px-10">
         <div className=" flex items-center">
           <span className="navbar-start text-2xl text-violetPurple bebas-neue-regular">
@@ -44,7 +57,7 @@ const Navbar = () => {
           <span className="navbar-start text-2xl bebas-neue-regular ml-1 text-black dark:text-white">
             Xynoo
           </span>
-          <div className="flex space-x-6 ml-5 poppins-semibold">
+          <div className="hidden md:flex space-x-6 ml-5 poppins-semibold">
             <Link
               to="/"
               className="text-black dark:text-white text-sm hover:text-violetPurple"
@@ -59,31 +72,89 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        <div className=" flex items-center ">
-          <div className="flex items-center mr-5 focus-within:text-violetPurple">
-            <input
-              type="text"
-              placeholder="Search Movie. . ."
-              onKeyDown={handleSearch}
-              className="input-search mr-5 p-2 pl-10 bg-black/50 backdrop-blur-sm rounded-[20px] w-60 focus:outline-none relative border-none placeholder-white text-sm poppins-regular"
-            />
+
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
             <Icon
-              icon="mingcute:search-line"
-              className="ml-3 absolute text-black dark:text-white"
+              icon="heroicons-outline:menu-alt-4"
+              className="text-2xl text-black dark:text-white items-center"
             />
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="absolute items-center w-full -ml-[40px] top-16  bg-white dark:bg-black/90 shadow-lg rounded-lg p-4 flex flex-col space-y-6 md:hidden">
+            <Link
+              to="/"
+              className="text-black dark:text-white text-sm hover:text-violetPurple"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/explore"
+              className="text-black dark:text-white text-sm hover:text-violetPurple"
+              onClick={() => setIsOpen(false)}
+            >
+              Explore
+            </Link>
+            <Link
+              to="/favorites"
+              className="text-black dark:text-white text-sm hover:text-violetPurple "
+            >
+              Favorite
+            </Link>
+            <Link
+              to="/ratings"
+              className="text-black dark:text-white text-sm  hover:text-violetPurple"
+            >
+              Rated
+            </Link>
+            <div className="flex items-center focus-within:text-black">
+              <input
+                type="text"
+                placeholder="Search Movie. . ."
+                onKeyDown={handleSearch}
+                className="input-search  p-2 pl-10 bg-white/50 backdrop-blur-sm rounded-[20px] w-60 focus:outline-none relative border-none placeholder-black text-sm poppins-regular"
+              />
+              <Icon
+                icon="mingcute:search-line"
+                className="ml-3 absolute text-white dark:text-black"
+              />
+            </div>
           </div>
-          <Link
-            to="/favorites"
-            className="text-black dark:text-white text-sm hover:text-violetPurple mr-5"
-          >
-            <Icon icon="stash:save-ribbon-duotone" className="text-2xl" />
-          </Link>
-          <Link
-            to="/ratings"
-            className="text-black dark:text-white text-sm mr-5 hover:text-violetPurple"
-          >
-            <Icon icon="uil:favorite" className="text-2xl" />
-          </Link>
+        )}
+
+        <div className=" flex items-center ">
+          <div className="hidden md:flex">
+            <div className="flex items-center mr-5 focus-within:text-violetPurple">
+              <input
+                type="text"
+                placeholder="Search Movie. . ."
+                onKeyDown={handleSearch}
+                className="input-search mr-5 p-2 pl-10 bg-black/50 backdrop-blur-sm rounded-[20px] w-60 focus:outline-none relative border-none placeholder-white text-sm poppins-regular"
+              />
+              <Icon
+                icon="mingcute:search-line"
+                className="ml-3 absolute text-black dark:text-white"
+              />
+            </div>
+            <Link
+              to="/favorites"
+              className="text-black dark:text-white text-sm hover:text-violetPurple mr-5"
+            >
+              <Icon
+                icon="stash:save-ribbon-duotone"
+                className="text-2xl mt-[5px]"
+              />
+            </Link>
+            <Link
+              to="/ratings"
+              className="text-black dark:text-white text-sm mr-5 hover:text-violetPurple"
+            >
+              <Icon icon="uil:favorite" className="text-2xl mt-[5px]" />
+            </Link>
+          </div>
           <label className="swap swap-rotate mr-5 text-black dark:text-white">
             {/* this hidden checkbox controls the state */}
             <input

@@ -9,8 +9,10 @@ const SearchView = ({ query, searchResults, loading, error, onCardClick }) => {
 
   return (
     <div className="pt-20 px-10 ml-5 min-h-screen">
-      <h1 className="text-2xl font-bold mb-6">Search Results: "{query}"</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Search Results: "{query}"
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:grid-cols-4 gap-1 justify-center mx-auto">
         {searchResults && searchResults.length > 0 ? (
           searchResults.map((movie) => (
             <Card
