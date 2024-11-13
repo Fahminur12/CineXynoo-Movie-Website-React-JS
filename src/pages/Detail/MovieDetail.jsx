@@ -10,6 +10,7 @@ import {
 import MovieDetailView from "./MovieDetailView";
 import { addFavorite, removeFavorite } from "../../store/action/favoriteAction";
 import { addRating, removeRating } from "../../store/action/ratingAction";
+import Loadings from "../../components/Loadings";
 
 const BASE_URL = "https://image.tmdb.org/t/p/original";
 
@@ -77,9 +78,8 @@ const MovieDetail = () => {
   }, []);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <Loadings />;
   }
-
   if (status === "failed") {
     return <div>Error: {error}</div>;
   }

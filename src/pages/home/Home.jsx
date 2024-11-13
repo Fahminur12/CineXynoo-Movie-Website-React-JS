@@ -6,7 +6,7 @@ import {
   getPopularMovies,
   getTrendingMovies,
   getGenres,
-  getMovieDetail, // Ensure this is imported
+  getMovieDetail,
 } from "../../store/reducer/moviesReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -23,6 +23,7 @@ const Home = () => {
   const [videoUrl, setVideoUrl] = useState(null);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const isLoading = status === "loading";
 
   useEffect(() => {
     dispatch(getTrendingMovies());
@@ -42,7 +43,7 @@ const Home = () => {
     const API_KEY = "f1701f8950348d98566289dc47fb1c6f";
     const BASE_URL = "https://api.themoviedb.org/3";
 
-    try { 
+    try {
       const response = await axios.get(
         `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`
       );
@@ -78,22 +79,18 @@ const Home = () => {
 
   const scroll = (ref, direction) => {
     if (ref.current) {
-      console.log(ref.current); 
+      console.log(ref.current);
       ref.current.scrollBy({
         left: direction === "left" ? -300 : 300,
         behavior: "smooth",
       });
     } else {
-      console.error("Ref is null"); 
+      console.error("Ref is null");
     }
   };
 
-  if (status === "loading") {
-    return <div>Loading...</div>; 
-  }
-
   if (status === "failed") {
-    return <div>Error: {error}. Please try again later.</div>; 
+    return <div>Error: {error}. Please try again later.</div>;
   }
 
   return (
@@ -105,14 +102,15 @@ const Home = () => {
         genres={genres}
         videoUrl={videoUrl}
         selectedMovie={selectedMovie}
-        scrollLeft={(ref) => scroll(ref, "left")} 
-        scrollRight={(ref) => scroll(ref, "right")} 
+        scrollLeft={(ref) => scroll(ref, "left")}
+        scrollRight={(ref) => scroll(ref, "right")}
         handleCardClick={handleCardClick}
         trendingRef={trendingRef}
         popularRef={popularRef}
         nowPlayingRef={nowPlayingRef}
         selectedGenre={selectedGenre}
         handleGenreChange={handleGenreChange}
+        isLoading={isLoading}
       />
     </div>
   );

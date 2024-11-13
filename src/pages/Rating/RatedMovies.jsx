@@ -22,6 +22,10 @@ const RatedMovies = () => {
     });
   }, [dispatch, movieIds]);
 
+  if (status === "loading") {
+    return <Loadings />;
+  }
+
   return (
     <RatedMoviesView
       movieIds={movieIds}

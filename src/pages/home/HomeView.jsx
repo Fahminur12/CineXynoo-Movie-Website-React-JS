@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Card from "../../components/Card";
+import Loading from "../../components/Loading";
 
 const HomeView = ({
   trending = [],
@@ -13,6 +14,7 @@ const HomeView = ({
   trendingRef,
   popularRef,
   nowPlayingRef,
+  isLoading,
 }) => {
   return (
     <div className="min-h-screen">
@@ -81,16 +83,24 @@ const HomeView = ({
             >
               <Icon icon="mdi:chevron-left" className="text-2xl" />
             </button>
-            <div
-              ref={trendingRef}
-              className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
-            >
-              {trending.map((movie) => (
-                <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
-                  <Card movie={movie} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex space-x-2 overflow-x-auto pb-4">
+                {[...Array(8)].map((_, index) => (
+                  <Loading key={index} className="w-48 h-72 rounded-lg" />
+                ))}
+              </div>
+            ) : (
+              <div
+                ref={trendingRef}
+                className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
+              >
+                {trending.map((movie) => (
+                  <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
+                    <Card movie={movie} />
+                  </div>
+                ))}
+              </div>
+            )}
             <button
               onClick={() => scrollRight(trendingRef)}
               className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full"
@@ -109,16 +119,24 @@ const HomeView = ({
             >
               <Icon icon="mdi:chevron-left" className="text-2xl" />
             </button>
-            <div
-              ref={popularRef}
-              className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
-            >
-              {popular.map((movie) => (
-                <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
-                  <Card movie={movie} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex space-x-2 overflow-x-auto">
+                {[...Array(8)].map((_, index) => (
+                  <Loading key={index} className="w-48 h-72 rounded-lg" />
+                ))}
+              </div>
+            ) : (
+              <div
+                ref={popularRef}
+                className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
+              >
+                {popular.map((movie) => (
+                  <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
+                    <Card movie={movie} />
+                  </div>
+                ))}
+              </div>
+            )}
             <button
               onClick={() => scrollRight(popularRef)}
               className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full"
@@ -137,16 +155,24 @@ const HomeView = ({
             >
               <Icon icon="mdi:chevron-left" className="text-2xl" />
             </button>
-            <div
-              ref={nowPlayingRef}
-              className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
-            >
-              {nowPlaying.map((movie) => (
-                <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
-                  <Card movie={movie} />
-                </div>
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex space-x-2 overflow-x-auto">
+                {[...Array(8)].map((_, index) => (
+                  <Loading key={index} className="w-48 h-72 rounded-lg" />
+                ))}
+              </div>
+            ) : (
+              <div
+                ref={nowPlayingRef}
+                className="flex overflow-x-auto space-x-2 pb-4 no-scrollbar"
+              >
+                {nowPlaying.map((movie) => (
+                  <div key={movie.id} onClick={() => handleCardClick(movie.id)}>
+                    <Card movie={movie} />
+                  </div>
+                ))}
+              </div>
+            )}
             <button
               onClick={() => scrollRight(nowPlayingRef)}
               className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 text-white p-2 rounded-full"
