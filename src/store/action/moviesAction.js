@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API_KEY = "f1701f8950348d98566289dc47fb1c6f";
-const BASE_URL = "https://api.themoviedb.org/3";
+
+// pemanggilan env 
+const API_KEY = import.meta.env.API_KEY;
+const BASE_URL = import.meta.env.BASE_URL;
 
 export const fetchGenres = async () => {
   const response = await axios.get(
